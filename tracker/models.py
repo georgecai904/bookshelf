@@ -69,3 +69,13 @@ class ReadBookRecord(models.Model):
 
     def __str__(self):
         return "{0} - {1}".format(self.start.strftime(FMT), self.end.strftime(FMT))
+
+
+class ReadingNote(models.Model):
+    book = models.ForeignKey(Book)
+    original = models.TextField(blank=True)
+    thought = models.TextField(blank=True)
+    createdDate = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return "{0}[{1}]".format(self.book, self.createdDate)

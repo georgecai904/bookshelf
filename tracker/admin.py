@@ -17,5 +17,9 @@ class ReadBookAdmin(admin.ModelAdmin):
     search_fields = ('book__name', )
 
 
+class ReadingNoteAdmin(admin.ModelAdmin):
+    list_display = ('book', 'createdDate', 'original', 'thought')
+
 
 admin.site.register(ReadBook, ReadBookAdmin)
+admin.site.register(ReadingNote, ReadingNoteAdmin)
