@@ -124,3 +124,5 @@ class BookListAdmin(admin.ModelAdmin):
 
 
 admin.site.register(BookList, BookListAdmin)
+
+admin.site.register(Tag)

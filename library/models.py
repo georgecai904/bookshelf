@@ -40,15 +40,22 @@ class Category(models.Model):
         return self.name
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=20, null=False, blank=False)
+
+    def __str__(self):
+        return self.name
+
 class Book(models.Model):
     name = models.CharField(max_length=30, blank=False, null=False, unique=True)
     subtitle = models.CharField(max_length=30, blank=True, null=True)
     series = models.CharField(max_length=30, blank=True, null=True)
-    pages = models.IntegerField()
-    year = models.IntegerField()
+    pages = models.IntegerField(blank=True)
+    year = models.IntegerField(blank=True)
     author = models.ForeignKey(Author, default=None, on_delete=models.CASCADE)
-    publisher = models.ForeignKey(Publisher, default=None, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, default=None, on_delete=models.CASCADE)
+    publisher = models.ForeignKey(Publisher, default=None, blank=True, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, default=None, blank=True, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag, default=None, blank=True)
 
     def __str__(self):
         return "{0}".format(self.name)
@@ -120,3 +127,7 @@ class BookListLine(models.Model):
     bookList = models.ForeignKey(BookList, on_delete=models.CASCADE)
     book = models.ForeignKey(Book)
     modified_at = models.DateField(auto_now=True)
+
+
+
+
