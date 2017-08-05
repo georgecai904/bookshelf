@@ -129,6 +129,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# MEDIA_ROOT = '/uploads/'
 JET_THEMES = [
     {
         'theme': 'default', # theme folder name
@@ -169,3 +173,4 @@ JET_APP_INDEX_DASHBOARD = 'jet.dashboard.dashboard.DefaultAppIndexDashboard'
 CRON_CLASSES = [
     "schedule.Backup",
 ]
+

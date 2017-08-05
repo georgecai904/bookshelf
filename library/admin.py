@@ -25,7 +25,16 @@ class BookAdmin(admin.ModelAdmin):
         return obj.readbook.status
     get_read_status.short_description = "Status"
 
-    list_display = ('name', 'author', 'series', 'category', 'get_read_status')
+    def get_cover(self, obj):
+        if obj.cover:
+            return format_html("<img src='http://localhost:8000/media/{0}' style='max-width:100px;'>".format(obj.cover))
+    get_cover.short_description = "Cover"
+
+    def get_tags(self, obj):
+        return format_html(",".join([i.name for i in obj.tags.all()]))
+    get_tags.short_description = "Tags"
+
+    list_display = ('get_cover', 'name', 'author', 'category', 'get_tags', 'get_read_status')
 
     list_filter = ('author', 'year', 'category',)
     def add_to_complete(self, request, queryset):

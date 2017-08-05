@@ -46,10 +46,12 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+
 class Book(models.Model):
     name = models.CharField(max_length=30, blank=False, null=False, unique=True)
     subtitle = models.CharField(max_length=30, blank=True, null=True)
     series = models.CharField(max_length=30, blank=True, null=True)
+    cover = models.FileField(upload_to='uploads/%Y/%m/%d', blank=True)
     pages = models.IntegerField(blank=True)
     year = models.IntegerField(blank=True)
     author = models.ForeignKey(Author, default=None, on_delete=models.CASCADE)
@@ -118,8 +120,6 @@ class BookList(models.Model):
                         book=book
                     )
         # elif self.name == ONWAIT:
-
-
         super(BookList, self).save(*args, **kwargs)
 
 
